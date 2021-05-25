@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	short N;
+	scanf("%hd", &N);
+	vector <int> len(N);
+	for(short i = 0; i <= N - 1; ++i) scanf("%d", &len[i]);
+	sort(len.begin(), len.end());
+	
+	long long w = 0;
+	for(short i = 0; i <= N - 3; ++i)
+	for(short j = i + 1; j <= N - 2; ++j)
+	{
+		const unsigned short pos = lower_bound(len.begin() + (j + 1), len.end(), len[i] + len[j]) - (len.begin() + 1);
+		if(pos != len.size()) w += pos - j;
+	}
+	
+	/*for(short k = N - 1; k >= j + 1; --k)
+	if(len[i] + len[j] > len[k])
+	{
+		w += k - j;
+		break;
+	}*/
+	
+	printf("%lld", w);
+	
+	return 0;
+}
+
